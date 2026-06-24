@@ -154,3 +154,26 @@ Leave the chroot and reboot into the new system:
 # umount -R /mnt
 # reboot
 ```
+
+## Data Drives
+
+Two HDDs (`/dev/sdb`, `/dev/sdc`) hold data: `/mnt/storage` and `/mnt/backup`. Each gets a single partition (`sdb1`, `sdc1`, created with `fdisk`), mounted by UUID rather than device name since `/dev/sdX` assignment isn't guaranteed to stay stable across reboots.
+
+```bash
+doas mkfs.ext4 /dev/sdb1
+doas mkfs.ext4 /dev/sdc1
+doas mkdir -p /mnt/storage /mnt/backup
+blkid /dev/sdb1 /dev/sdc1
+```
+
+Append the fstab lines:
+```bash
+echo "UUID=$(doas blkid -s UUID -o value /dev/sdb1)  /mnt/storage  ext4  defaults,nofail  0  2" | doas tee -a /etc/fstab
+echo "UUID=$(doas blkid -s UUID -o value /dev/sdc1)  /mnt/backup   ext4  defaults,nofail  0  2" | doas tee -a /etc/fstab
+```
+
+> `nofail` keeps the boot from hanging if a drive is unplugged or fails to spin up.
+
+```bash
+doas mount -a
+```
