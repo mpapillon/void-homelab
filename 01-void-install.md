@@ -53,7 +53,7 @@ Copy the RSA keys from the installation medium to the target root, required for 
 
 Install the base system and every package needed for the rest of this guide:
 ```
-# XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-minimal linux linux-firmware-intel bash file less ncurses man-pages mdocml kbd dhcpcd openssh chrony socklog-void iputils git wget opendoas gummiboot
+# XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-minimal linux linux-firmware-intel bash file less ncurses man-pages mdocml kbd dhcpcd openssh chrony socklog-void iputils iproute2 git wget opendoas gummiboot
 ```
 
 ## Configuration
