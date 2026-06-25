@@ -18,4 +18,5 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 2. [WireGuard](02-wireguard.md) — VPN access to the server
 3. [dnsmasq](03-dnsmasq.md) — private subdomains, reachable only over WireGuard
 4. [Immich](04-immich.md) — self-hosted photo backup, with hardware transcoding
-5. [Nginx](05-nginx.md) — reverse proxy, one subdomain per app
+5. [acme.sh](05-acme.md) — SSL certificates via OVH DNS API
+6. [Nginx](06-nginx.md) — reverse proxy, one subdomain per app

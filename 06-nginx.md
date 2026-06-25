@@ -19,11 +19,11 @@ I made my own config for reverse proxying in this repo in `nginx/nginx.conf`.
  
 Each application gets its own config file in `/etc/nginx/conf.d/`.
 
-Example for [Immich](04-immich.md), in `/etc/nginx/conf.d/immich.conf`. The extra directives below (body size, buffering, timeouts) aren't generic Nginx boilerplate: they're there because Immich uploads large photo/video files and uses WebSocket for realtime updates.
+Example for [Immich](04-immich.md), in `/etc/nginx/conf.d/immich.conf`. The extra directives below (body size, buffering, timeouts) aren't generic Nginx boilerplate: they're there because Immich uploads large photo/video files and uses WebSocket for realtime updates. HTTPS (cert, HTTP→HTTPS redirect) is handled once for every subdomain in `nginx/nginx.conf`, see [acme.sh](05-acme.md), each vhost only needs `listen 443 ssl`.
 ```nginx
 server {
-    listen 80;
-    listen [::]:80;
+    listen 443 ssl;
+    listen [::]:443 ssl;
     server_name immich.<subdomain>.<domain>;
 
     # allow large file uploads (photos/videos)
