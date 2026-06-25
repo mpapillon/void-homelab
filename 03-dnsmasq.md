@@ -10,9 +10,9 @@ doas xbps-install dnsmasq
 
 ## Configuration
 
-Edit `/etc/dnsmasq.conf` to enable conf dir: 
-```
-conf-dir=/etc/dnsmasq.d/,*.conf
+Enable conf dir: 
+```bash
+echo "conf-dir=/etc/dnsmasq.d/,*.conf" | doas tee -a /etc/dnsmasq.conf
 ```
 
 Create file `/etc/dnsmasq.d/default.conf`:

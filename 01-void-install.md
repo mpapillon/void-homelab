@@ -1,6 +1,6 @@
-# My Void Linux Server Install Guide
+# Void Linux Server installation
 
-Opinionated, minimalist install guide for a Void Linux server. Headless, no systemd, essential packages only.
+Base system install: partitions, chroot, users, bootloader.
 
 Stack: `doas` (sudo replacement), `systemd-boot`/gummiboot (bootloader), `dhcpcd` (network), `nftables` (firewall).
 
@@ -109,9 +109,9 @@ Edit files:
 
 ### doas
 
-Add to `/etc/doas.conf`:
+Set `doas` config:
 ```
-permit persist :wheel as root
+[xchroot /mnt] # echo "permit persist :wheel as root" | tee /etc/doas.conf
 ```
 
 `:wheel` grants any wheel member, not just one user. `persist` caches auth for a few minutes instead of `nopass`, which never asks at all. `doas` refuses to run if the config file isn't strictly owned/permissioned:
@@ -128,10 +128,7 @@ Should enable non-free repo before:
 [xchroot /mnt] # xbps-install -S intel-ucode
 ```
 
-Regenerate initramfs:
-```
-[xchroot /mnt] # xbps-reconfigure -f linux<version>
-```
+The `initramfs` is regenerated as part of [Finalization](#finalization).
 
 ## Install systemd-boot (ex: gummiboot)
 

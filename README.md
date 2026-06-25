@@ -4,7 +4,7 @@ Notes on running a minimalist home server on [Void Linux](https://voidlinux.org/
 
 ## Philosophy
 
-Minimal and simple over feature-complete. No systemd, no unnecessary daemons, no abstraction I can't explain. Every package and service earns its place.
+Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I can't explain. Every package and service earns its place.
 
 ## Hardware
 
@@ -19,5 +19,3 @@ Minimal and simple over feature-complete. No systemd, no unnecessary daemons, no
 3. [dnsmasq](03-dnsmasq.md) — private subdomains, reachable only over WireGuard
 4. [Immich](04-immich.md) — self-hosted photo backup, with hardware transcoding
 5. [Nginx](05-nginx.md) — reverse proxy, one subdomain per app
-
-Placeholders like `<domain>`, `<subdomain>` and `<PORT>` stand in for real values I'm keeping private.

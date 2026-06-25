@@ -1,4 +1,4 @@
-# Wireguard guide
+# WireGuard configuration
 
 ## Installation
 
@@ -36,7 +36,7 @@ Create `/etc/wireguard/wg0.conf`:
 [Interface]
 Address = 10.0.0.1/24
 ListenPort = <PORT>
-PrivateKey = <SERVEUR_PRIVATE_KEY>
+PrivateKey = <SERVER_PRIVATE_KEY>
 
 [Peer]
 # Phone
@@ -66,7 +66,7 @@ Address = 10.0.0.2/24
 DNS = 10.0.0.1
  
 [Peer]
-PublicKey = <SERVEUR_PUBLIC_KEY>
+PublicKey = <SERVER_PUBLIC_KEY>
 Endpoint = <domain>:<PORT>
 AllowedIPs = 10.0.0.0/24
 PersistentKeepalive = 25
