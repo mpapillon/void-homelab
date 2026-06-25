@@ -14,9 +14,10 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 
 ## Guides
 
-1. [Void Linux install](01-void-install.md) — base system, partitions, doas, bootloader
-2. [WireGuard](02-wireguard.md) — VPN access to the server
-3. [dnsmasq](03-dnsmasq.md) — private subdomains, reachable only over WireGuard
-4. [Immich](04-immich.md) — self-hosted photo backup, with hardware transcoding
-5. [acme.sh](05-acme.md) — SSL certificates via OVH DNS API
-6. [Nginx](06-nginx.md) — reverse proxy, one subdomain per app
+1. [Void Linux install](01-void-install.md) - base system, partitions, doas, bootloader
+2. [WireGuard](02-wireguard.md) - VPN access to the server
+3. [dnsmasq](03-dnsmasq.md) - private subdomains, reachable only over WireGuard
+4. [Immich](04-immich.md) - self-hosted photo backup, with hardware transcoding
+5. [acme.sh](05-acme.md) - SSL certificates via OVH DNS API
+6. [Nginx](06-nginx.md) - reverse proxy, one subdomain per app
+7. [Runit services](07-runit-services.md) - supervising custom daemons
