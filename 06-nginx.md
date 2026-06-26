@@ -13,13 +13,13 @@ doas mkdir -p /etc/nginx/conf.d
 ## Create config
 
 The default config of nginx provided by Void does not use `conf.d`. 
-I made my own config for reverse proxying in this repo in `nginx/nginx.conf`.
+I made my own config for reverse proxying in this repo in `config/nginx.conf`.
 
 ## One virtual host per application
  
 Each application gets its own config file in `/etc/nginx/conf.d/`.
 
-Example for [Immich](04-immich.md), in `/etc/nginx/conf.d/immich.conf`. The extra directives below (body size, buffering, timeouts) aren't generic Nginx boilerplate: they're there because Immich uploads large photo/video files and uses WebSocket for realtime updates. HTTPS (cert, HTTP→HTTPS redirect) is handled once for every subdomain in `nginx/nginx.conf`, see [acme.sh](05-acme.md), each vhost only needs `listen 443 ssl`.
+Example for [Immich](04-immich.md), in `/etc/nginx/conf.d/immich.conf`. The extra directives below (body size, buffering, timeouts) aren't generic Nginx boilerplate: they're there because Immich uploads large photo/video files and uses WebSocket for realtime updates. HTTPS (cert, HTTP→HTTPS redirect) is handled once for every subdomain in `config/nginx.conf`, see [acme.sh](05-acme.md), each vhost only needs `listen 443 ssl`.
 ```nginx
 server {
     listen 443 ssl;

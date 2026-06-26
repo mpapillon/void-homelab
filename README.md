@@ -21,3 +21,4 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 5. [acme.sh](05-acme.md) - SSL certificates via OVH DNS API
 6. [Nginx](06-nginx.md) - reverse proxy, one subdomain per app
 7. [Runit services](07-runit-services.md) - supervising custom daemons
+8. [Security](08-security.md) - SSH hardening, nftables firewall

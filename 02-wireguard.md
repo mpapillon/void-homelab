@@ -35,7 +35,7 @@ Create `/etc/wireguard/wg0.conf`:
 ```ini
 [Interface]
 Address = 10.0.0.1/24
-ListenPort = <PORT>
+ListenPort = 51820
 PrivateKey = <SERVER_PRIVATE_KEY>
 
 [Peer]
@@ -67,7 +67,7 @@ DNS = 10.0.0.1
  
 [Peer]
 PublicKey = <SERVER_PUBLIC_KEY>
-Endpoint = <domain>:<PORT>
+Endpoint = <domain>:51820
 AllowedIPs = 10.0.0.0/24
 PersistentKeepalive = 25
 ```
