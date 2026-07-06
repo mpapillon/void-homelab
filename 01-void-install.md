@@ -30,9 +30,15 @@ My layout:
 
 Mount the target partitions:
 ```
-# mount /dev/sda2 /mnt
+# mount /dev/sda3 /mnt
 # mkdir /mnt/boot
 # mount /dev/sda1 /mnt/boot
+```
+
+Enable swap:
+```
+# mkswap /dev/sda2
+# swapon /dev/sda2
 ```
 
 ### Install via XBPS
