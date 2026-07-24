@@ -87,6 +87,7 @@ Edit file: `/etc/hostname`
 Edit files:
   * `/etc/rc.conf` - keymap
   * `/etc/default/libc-locales` - uncomment fr_FR
+  * `/etc/locale.conf` - set `LANG=fr_FR.UTF-8`
 
 ```
 [xchroot /mnt] # xbps-reconfigure -f glibc-locales
