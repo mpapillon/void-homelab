@@ -23,3 +23,4 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 7. [Runit services](07-runit-services.md) - supervising custom daemons
 8. [Security](08-security.md) - SSH hardening, nftables firewall
 9. [Miscellaneous](09-misc.md) - SSD TRIM, USB drive APM
+10. [Bash configuration](10-bash.md) - prompt, completions, login banner
