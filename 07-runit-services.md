@@ -51,10 +51,16 @@ exec chpst -u <user> /usr/local/bin/<binary> [flags]
 
 ```sh
 #!/bin/sh
-exec vlogger -t <service> -p daemon
+exec svlogd -t /var/log/<service>
 ```
 
-Sends all output to socklog under the `daemon` facility, tagged with the service name.
+Writes straight to a directory dedicated to this service, instead of going through `vlogger`/`socklog` and piling everyone's output into the shared `daemon` facility. `svlogd` handles rotation itself (`current`, rotated to `@<timestamp>.s` past the size limit) and `-t` prefixes each line with a TAI64N timestamp.
+
+The directory must exist before the service starts:
+
+```sh
+doas mkdir -p /var/log/<service>
+```
 
 ## Permissions
 
@@ -66,21 +72,15 @@ doas chmod +x /etc/sv/<service>/run /etc/sv/<service>/log/run
 
 ## Reading logs
 
-Requires `socklog-void`, enabled in [Void install](01-void-install.md). Logs are saved in sub-directories of `/var/log/socklog/`. Reading logs requires being `root` or a member of the `socklog` group.
+Each service's own logs live under `/var/log/<service>/`, written directly by its `log/run`. No `socklog`/`vlogger` in the path, so nothing to filter by tag:
 
 ```sh
-# All daemon logs (live)
-svlogtail daemon
-
-# Filter by service tag
-svlogtail daemon | grep <service>
-
-# Available facilities
-ls /var/log/socklog/
-# cron  daemon  debug  errors  everything  kernel  ...
+tail -f /var/log/<service>/current
 ```
 
-`svlogtail <facility>` tails `/var/log/socklog/<facility>/current`. There is no per-service directory, filter with `grep` for custom services using `vlogger`.
+With `-t`, each line in `current` gets a TAI64N timestamp prefixed (e.g. `@4000000068889abc12345678 <line>`), not human-readable on its own. Pipe through `tai64nlocal` to convert it to local time, or drop `-t` in `log/run` if you'd rather keep plain lines with no timestamp.
+
+System-level logging (kernel, auth, and anything else emitting through the syslog socket) still goes through `socklog-void`, enabled in [Void install](01-void-install.md), under `/var/log/socklog/<facility>/`:
 
 ## Example: rubisd
 
@@ -103,15 +103,15 @@ exec chpst -u rubisd /usr/local/bin/rubis \
   -base-url https://rubis.<subdomain>.<domain>
 ```
 
-`/etc/sv/rubisd/log/run`:
+`/etc/sv/rubisd/log/run` (directory created first with `doas mkdir -p /var/log/rubisd`):
 
 ```sh
 #!/bin/sh
-exec vlogger -t rubisd -p daemon
+exec svlogd -t /var/log/rubisd
 ```
 
 Reading logs:
 
 ```sh
-svlogtail daemon | grep rubisd
+tail -f /var/log/rubisd/current
 ```
