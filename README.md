@@ -15,12 +15,13 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 ## Guides
 
 1. [Void Linux install](01-void-install.md) - base system, partitions, doas, bootloader
-2. [WireGuard](02-wireguard.md) - VPN access to the server
-3. [dnsmasq](03-dnsmasq.md) - private subdomains, reachable only over WireGuard
-4. [Immich](04-immich.md) - self-hosted photo backup, with hardware transcoding
-5. [acme.sh](05-acme.md) - SSL certificates via OVH DNS API
-6. [Nginx](06-nginx.md) - reverse proxy, one subdomain per app
-7. [Runit services](07-runit-services.md) - supervising custom daemons
-8. [Security](08-security.md) - SSH hardening, nftables firewall
-9. [Miscellaneous](09-misc.md) - SSD TRIM, USB drive APM
-10. [Bash configuration](10-bash.md) - prompt, completions, login banner
+2. [Cron](02-cron.md) - `snooze` + runit as a cron replacement
+3. [WireGuard](03-wireguard.md) - VPN access to the server
+4. [dnsmasq](04-dnsmasq.md) - private subdomains, reachable only over WireGuard
+5. [Immich](05-immich.md) - self-hosted photo backup, with hardware transcoding
+6. [acme.sh](06-acme.md) - SSL certificates via OVH DNS API
+7. [Nginx](07-nginx.md) - reverse proxy, one subdomain per app
+8. [Runit services](08-runit-services.md) - supervising custom daemons
+9. [Security](09-security.md) - SSH hardening, nftables firewall
+10. [Miscellaneous](10-misc.md) - SSD TRIM, USB drive APM
+11. [Bash configuration](11-bash.md) - prompt, completions, login banner

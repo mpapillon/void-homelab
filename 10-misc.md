@@ -2,13 +2,7 @@
 
 ## SSD TRIM
 
-Weekly TRIM keeps the SSD healthy by letting the controller reclaim deleted blocks.
-
-Enable the weekly runner (`snooze` is already installed from [SSL setup](05-acme.md)):
-
-```sh
-doas ln -s /etc/sv/snooze-weekly /var/service
-```
+Weekly TRIM keeps the SSD healthy by letting the controller reclaim deleted blocks. Runs via `snooze-weekly`, see [Cron](02-cron.md) for installing and enabling `snooze`.
 
 Create the weekly TRIM script:
 

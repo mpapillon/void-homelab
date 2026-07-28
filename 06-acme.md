@@ -6,8 +6,10 @@ Renewal runs unprivileged, only the final deploy step (copying the cert where Ng
 ## Installation
 
 ```bash
-doas xbps-install acme.sh snooze
+doas xbps-install acme.sh
 ```
+
+Daily renewal runs via `snooze-daily`, see [Cron](02-cron.md) for installing and enabling `snooze`.
 
 ## Dedicated user
 
@@ -95,7 +97,7 @@ doas -u acme sh -c '. /home/acme/.ovh_keys && acme.sh --install-cert -d <domain>
 
 ## Automatic renewal
 
-`acme.sh --cron` only renews certs nearing expiry (< 30 days), so a daily check is enough. The `snooze` package ships a `snooze-daily` service that runs every script in `/etc/cron.daily/`:
+`acme.sh --cron` only renews certs nearing expiry (< 30 days), so a daily check is enough. It's dropped into `/etc/cron.daily/`, run by `snooze-daily` (see [Cron](02-cron.md)).
 
 `snooze-daily` runs as root, so the script drops to `acme` via `su` before calling `acme.sh` (the reload hook configured above then escalates back to root only for `deploy-cert.sh`):
 
@@ -105,5 +107,4 @@ doas tee /etc/cron.daily/acme-renew <<'EOF'
 exec su -s /bin/sh acme -c '. /home/acme/.ovh_keys && acme.sh --cron'
 EOF
 doas chmod +x /etc/cron.daily/acme-renew
-doas ln -s /etc/sv/snooze-daily /var/service
 ```

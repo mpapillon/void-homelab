@@ -80,7 +80,7 @@ tail -f /var/log/<service>/current
 
 With `-t`, each line in `current` gets a TAI64N timestamp prefixed (e.g. `@4000000068889abc12345678 <line>`), not human-readable on its own. Pipe through `tai64nlocal` to convert it to local time, or drop `-t` in `log/run` if you'd rather keep plain lines with no timestamp.
 
-System-level logging (kernel, auth, and anything else emitting through the syslog socket) still goes through `socklog-void`, enabled in [Void install](01-void-install.md), under `/var/log/socklog/<facility>/`:
+System-level logging (kernel, auth, and anything else emitting through the syslog socket) still goes through `socklog-void`, enabled in [Void install](01-void-install.md), under `/var/log/socklog/<facility>/`. Reusing an existing facility that fits semantically beats a dedicated `svlogd` directory when several small jobs share the same nature. See [Cron](02-cron.md#logging) for `snooze` piggybacking on the pre-defined `cron` facility via `vlogger`.
 
 ## Example: rubisd
 

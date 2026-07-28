@@ -30,14 +30,12 @@ Pending updates come from the local xbps cache, kept fresh by the script below, 
 
 ## Pending updates: xbps-sync
 
-Refreshes the repository cache daily so the MOTD's update count stays current. Unlike `acme-renew` ([ACME setup](05-acme.md)) it doesn't need to drop privileges, `xbps-install -S` just needs root, which `snooze-daily` already runs as:
+[Cron](02-cron.md) to refresh the repository cache daily so the MOTD's update count stays current:
 
 ```sh
 doas tee /etc/cron.daily/xbps-sync <<'EOF'
 #!/bin/sh
-xbps-install -S >/dev/null 2>&1
+xbps-install -S
 EOF
 doas chmod +x /etc/cron.daily/xbps-sync
 ```
-
-`snooze-daily` is already enabled from [ACME setup](05-acme.md).
