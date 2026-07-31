@@ -25,3 +25,4 @@ Opinionated and minimal: no systemd, no unnecessary daemons, no abstraction I ca
 9. [Security](09-security.md) - SSH hardening, nftables firewall
 10. [Miscellaneous](10-misc.md) - SSD TRIM, USB drive APM
 11. [Bash configuration](11-bash.md) - prompt, completions, login banner
+12. [Borg backup](12-borg-backup.md) - backups for the server and its clients, per-client SSH-restricted repos, plus the server's own SQLite/Postgres data

@@ -14,10 +14,8 @@ The package ships pre-built runit services for the classic cron cadences, each j
 
 - `snooze-daily` runs `/etc/cron.daily/`
 - `snooze-weekly` runs `/etc/cron.weekly/`
+- `snooze-monthly` runs `/etc/cron.monthly/`
 - `snooze-hourly` runs `/etc/cron.hourly/` (not used here)
-- `snooze-monthly` runs `/etc/cron.monthly/` (not used here)
-
-Only `snooze-daily` and `snooze-weekly` are enabled on this server.
 
 ## Enabling a cadence
 
@@ -32,7 +30,9 @@ Drop an executable script in the matching `/etc/cron.<cadence>/` directory. Jobs
 
 - `acme-renew` (daily): cert renewal check, see [ACME setup](06-acme.md#automatic-renewal)
 - `xbps-sync` (daily): refreshes the xbps repo cache for the MOTD, see [Bash configuration](11-bash.md#pending-updates-xbps-sync)
+- `backup-local` (daily): backup script with Borg, see [Borg backup](12-borg-backup.md#daily-job)
 - `fstrim` (weekly): SSD TRIM, see [Miscellaneous](10-misc.md#ssd-trim)
+- `backup-local-verify` (monthly): Borg compact + integrity check, see [Borg backup](12-borg-backup.md#monthly-check)
 
 ## Logging
 
@@ -53,7 +53,7 @@ exec vlogger -t snooze-daily -p cron
 doas chmod +x /etc/sv/snooze-daily/log/run
 ```
 
-Same for `snooze-weekly`, with `-t snooze-weekly`.
+Same for `snooze-weekly` and `snooze-monthly`, with `-t snooze-weekly`/`-t snooze-monthly`.
 
 By default `run-parts` doesn't tag each script's own output with its name (only `--verbose` does that, and the shipped `run` doesn't pass it), so everything landing in the `cron` facility for a given cadence is just the raw concatenated output of whatever ran that cycle. There are only 1-2 jobs per cadence here, small enough to eyeball without per-job tagging.
 

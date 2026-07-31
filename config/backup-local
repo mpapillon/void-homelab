@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+sqlite3_rsync /var/lib/rubis/rubis.db /var/backups/local/sqlite/rubis.db
+docker exec -t immich_postgres pg_dumpall --clean --if-exists --username=<db_username> > /var/backups/local/immich-postgres/immich-database.sql
+
+borg create /mnt/backup/repo-server::{now:%Y-%m-%d-%H%M%S} \
+  /var/backups/local \
+  /mnt/storage \
+  /home \
+  /srv/git \
+  --exclude /mnt/storage/immich/thumbs \
+  --exclude /mnt/storage/immich/encoded-video
+borg prune --keep-daily=7 --keep-weekly=4 --keep-monthly=6 --keep-yearly=2 /mnt/backup/repo-server

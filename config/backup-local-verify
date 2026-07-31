@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+borg compact /mnt/backup/repo-server
+borg check /mnt/backup/repo-server
